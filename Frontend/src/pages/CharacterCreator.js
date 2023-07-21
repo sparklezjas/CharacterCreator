@@ -11,7 +11,6 @@ import darkElfRightLeg from '../images/dark_elf_1/Right Leg.png';
 import darkElfLeftLeg from '../images/dark_elf_1/Left Leg.png';
 import darkElfWeapon from '../images/dark_elf_1/Weapon.png';
 import '../CSS/CharacterCreator.css'
-import axios from 'axios'
 
 const character_types = ['dark_elf_1', 'minotaur_1', 'goblin_1', 'citizen_women_1'];
 const CharacterCreator = () => {
@@ -164,7 +163,7 @@ useEffect(() => {
       setCharacterName('')
       setHP(100)
       setErrors(null)
-      console.log('new character added')
+      navigate('/characters/all')
   }
 }
 
