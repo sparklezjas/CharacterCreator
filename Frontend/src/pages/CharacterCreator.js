@@ -128,11 +128,19 @@ useEffect(() => {
     }
     return index;
   };
-
   const submitHandler = async (e) => {
     e.preventDefault()
-    const character = {head, face, body, arms, legs, weapon, characterName, HP}
-
+    const character = {
+      head: character_types[headIndex],
+      face: character_types[faceIndex],
+      body: character_types[bodyIndex],
+      arms: character_types[armsIndex],
+      legs: character_types[legsIndex],
+      weapon: character_types[weaponIndex],
+      characterName,
+      HP: 100,
+    }
+    console.log('Character data to be sent:', character);
     const response = await fetch('http://localhost:4000/api/characters/new', {
       method: 'POST',
       body: JSON.stringify(character),
@@ -141,10 +149,10 @@ useEffect(() => {
       
       }
     })
-    const json = await response.json()
+    const data = await response.json()
 
     if (!response.ok) {
-      setErrors(json.error)
+      setErrors(data.error)
   }
   if (response.ok) {
       setHead(character_types[headIndex])
@@ -215,7 +223,7 @@ useEffect(() => {
       <button type="button" onClick={() => change_character_piece(1, 'Weapon')} className="char_button button_right weapon_button">
         Weapon→
       </button>
-      <input type='text'></input>
+      <input type="text" onChange={(e) => setCharacterName(e.target.value)} value={characterName} />
       <button className='submit_button char_button'  type='submit'>Submit</button>
     </form>
   );
