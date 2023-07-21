@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import CharacterCreator from './pages/CharacterCreator'
+import LogoSign from './components/LogoSign'
 
 function App() {
   const { user } = useAuthContext()
@@ -13,6 +14,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <LogoSign/>
         <div className="pages">
           <Routes>
             <Route
