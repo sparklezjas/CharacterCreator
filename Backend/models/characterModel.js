@@ -7,11 +7,19 @@ const characterSchema = new Schema({
         type: String,
         required: true
     },
-    eyes: {
+    face: {
         type: String,
         required: true
     },
     body: {
+        type: String,
+        required: true
+    },
+    arms: {
+        type: String,
+        required: true
+    },
+    legs: {
         type: String,
         required: true
     },

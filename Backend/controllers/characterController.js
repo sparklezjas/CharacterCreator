@@ -21,9 +21,9 @@ const getCharacter = async (req, res) => {
 }
 
 const createCharacter = async (req, res) => {
-    const {head, eyes, body, weapon, characterName, HP} = req.body
+    const {head, face, body, arms, legs, weapon, characterName, HP} = req.body
     try{ 
-        const character = await Characters.create({head, eyes, body, weapon, characterName, HP})
+        const character = await Characters.create({head, face, body, arms, legs, weapon, characterName, HP})
         res.status(200).json(character)
     }
         catch (error){

@@ -9,10 +9,10 @@ const {
 
 const router = express.Router()
 
-router.get('/', getCharacters)
-router.get('/:id', getCharacter)
-router.post('/', createCharacter)
-router.delete('/:id', deleteCharacter)
-router.patch('/:id', updateCharacter)
+router.get('/all', getCharacters)
+router.get('/one/:id', getCharacter)
+router.post('/new', createCharacter)
+router.delete('/delete/:id', deleteCharacter)
+router.patch('/edit/:id', updateCharacter)
 
 module.exports = router

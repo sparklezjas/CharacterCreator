@@ -1,0 +1,129 @@
+button {
+  z-index: 25;
+}
+ 
+.character_div {
+  position: relative;
+  width: 30rem;
+  height: 25rem;
+  margin: 15% auto;
+  background-color: rgba(0,0,0,.3);
+  border: 2px solid salmon;
+}
+/* Character vector image sizing & positioning / */
+.char_head {
+  width: 200px;
+  position: absolute;
+  top: .1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+}
+.char_body, .char_face {
+  width: 133.33px;
+}
+.char_face {
+  position: absolute;
+  top: 5.6rem;
+  left: 12.1rem;
+  z-index: 20;
+}
+.char_body {
+  position: absolute;
+  top: 8rem;
+  left: 10.8rem;
+  z-index: 5;
+}
+.char_weapon {
+  width: 166.666px;
+  transform: rotate(-20deg);
+  position: absolute;
+  top: 10.5rem;
+  right: 4.3rem;
+  z-index: 0;
+}
+.grouped_char_piece {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left_arm_div {
+  position: absolute;
+  top: 11.4rem;
+  left: 15.4rem;
+  z-index: 1;
+}
+.right_arm_div {
+  position: absolute;
+  top: 11.9rem;
+  left: 11.7rem;
+  z-index: 10;
+}
+.char_left_arm {
+  position: absolute;
+  z-index: 5;
+  width: 53.33px;
+}
+.char_left_hand {
+  position: absolute;
+  top: .3rem;
+  left: .2rem;
+  width: 53.33px;
+}
+.char_right_arm {
+  position: absolute;
+  z-index: 5;
+  width: 53.33px;
+}
+.char_right_hand {
+  position: absolute;
+  top: 0rem;
+  left: -.2rem;
+  width: 53.33px;
+}
+.leg_div {
+  position: absolute;
+  top: 12.9rem;
+  left: 12.1rem;
+  z-index: 0;
+}
+.char_left_leg {
+  width: 53.33px;
+  margin-left: -1rem;
+}
+.char_right_leg {
+  width: 53.33px;
+  margin-left: .5rem;
+}
+/* / Button position for character builder */
+.button_left {
+  left: 0;
+}
+.button_right {
+  right: 0;
+}
+.char_button {
+  position: absolute;
+}
+.head_button {
+  top: 5rem;
+}
+.face_button {
+  top: 7rem;
+}
+.weapon_button {
+  top: 9rem;
+}
+.body_button {
+  top: 11rem;
+}
+.arm_button {
+  top: 13rem;
+}
+.leg_button {
+  top: 15rem;
+}
+.submit_button{
+  bottom: 0rem;
+  
+}
