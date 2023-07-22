@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
 
 const Home = () => {
     const {user} = useAuthContext()
     const [allCharacters, setAllCharacters] = useState([]);
     const [sortOrder, setSortOrder] = useState();
-    
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -46,20 +47,27 @@ const Home = () => {
         axios
           .delete(`http://localhost:4000/api/characters/delete/${id}`)
           .then((res) => {
-
+            // Perform any necessary actions after successful deletion
+            axios
+              .get(`http://localhost:4000/api/characters/all`)
+              .then((res) => {
+                setAllCharacters(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           })
           .catch((err) => {
             console.log(err);
           });
       };
 
-      useEffect(() => {
-        axios.get(`http://localhost:4000/api/characters/all`)
-        .then((res) => {
-            setAllCharacters(res.data)
-        })
-        .catch((err) => console.log(err))
-      }, [deleteHandler])
+      const editPage = (id) => {
+        navigate(`/characters/edit/${id}`);
+      };
+      
+      
+      
 return (
     <div className="home">
         <div className="characters">
@@ -69,6 +77,7 @@ return (
                     <Character key={character._id} 
                     character = {character}
                     onDelete={() => deleteHandler(character._id)}
+                    onEdit={() => editPage(character._id)}
                     />
                     
                 ))}

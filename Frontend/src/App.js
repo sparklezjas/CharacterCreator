@@ -6,6 +6,7 @@ import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import CharacterCreator from './pages/CharacterCreator'
 import LogoSign from './components/LogoSign'
+import EditCharacter from './pages/EditCharacter'
 
 function App() {
   const { user } = useAuthContext()
@@ -32,6 +33,10 @@ function App() {
             <Route
               path="/characters/new"
               element={!user ? <Login /> : <CharacterCreator/>}/>
+            
+            <Route
+              path="/characters/edit/:id"
+              element={!user ? <Login /> : <EditCharacter/>}/>
               
           </Routes>
         </div>
