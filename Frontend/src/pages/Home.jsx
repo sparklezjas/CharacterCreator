@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
 
 const Home = () => {
+
     const { user } = useAuthContext()
     const [allCharacters, setAllCharacters] = useState([])
     const [sortedCharacters, setSortedCharacters] = useState([])
     const [sortOrder, setSortOrder] = useState()
+
 
     useEffect(() => {
     axios
@@ -47,26 +50,43 @@ const Home = () => {
     }
 
     const deleteHandler = (id) => {
-    axios
-            .delete(`http://localhost:4000/api/characters/delete/${id}`)
-            .then((res) => {
-                setAllCharacters(allCharacters.filter(character => character._id !== id))
-                setSortedCharacters(sortedCharacters.filter(character => character._id !== id))
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
 
-    return (
-        <div className="home">
-            <button onClick={sortByNewest}>Newest</button>
-            <button onClick={sortByOldest}>Oldest</button>
-            <div className="characters-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {sortedCharacters && sortedCharacters.map((character) => (
-                    <Character key={character._id}
-                        character={character}
-                        onDelete={() => deleteHandler(character._id)}
+        axios
+          .delete(`http://localhost:4000/api/characters/delete/${id}`)
+          .then((res) => {
+            // Perform any necessary actions after successful deletion
+            axios
+              .get(`http://localhost:4000/api/characters/all`)
+              .then((res) => {
+                setAllCharacters(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+
+      const editPage = (id) => {
+        navigate(`/characters/edit/${id}`);
+      };
+      
+      
+      
+return (
+    <div className="home">
+        <div className="characters">
+                <button onClick={sortByNewest}>Newest</button>
+                <button onClick={sortByOldest}>Oldest</button>
+                {allCharacters && allCharacters.map((character) => (
+                    <Character key={character._id} 
+                    character = {character}
+                    onDelete={() => deleteHandler(character._id)}
+                    onEdit={() => editPage(character._id)}
+=======
+
                     />
                 ))}
             </div>

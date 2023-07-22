@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../CSS/CharacterCreator.css'
 
-const Character = ({character, onDelete}) => {
+const Character = ({character, onDelete, onEdit}) => {
     const [headImage, setHeadImage] = useState(null)
     const [faceImage, setFaceImage] = useState(null);
     const [bodyImage, setBodyImage] = useState(null);
@@ -119,6 +119,7 @@ useEffect(() => {
       </div>
       {weaponImage && <img src={weaponImage} alt="weapon" className="char_weapon" />}
       <button onClick={onDelete}>Delete</button>
+      <button onClick={onEdit}>Edit</button>
     </div>
   )
 }
