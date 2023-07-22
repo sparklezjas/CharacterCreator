@@ -85,7 +85,6 @@ return (
                     character = {character}
                     onDelete={() => deleteHandler(character._id)}
                     onEdit={() => editPage(character._id)}
-=======
 
                     />
                 ))}
