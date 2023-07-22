@@ -1,0 +1,35 @@
+.container {
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+
+.authButtons {
+    border: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    margin: 5px 5px 0px 0px;
+    scale: 80%;
+}
+
+.authButtons:hover {
+    filter: brightness(1.1) contrast(1.3);
+}
+
+.loginBtn {
+    height: 50px;
+    width: 126px;  
+}
+
+.registerBtn {
+    height: 50px;
+    width: 160px;
+}
+
+.logoutBtn {
+    height: 50px;
+    width: 148px;
+}
