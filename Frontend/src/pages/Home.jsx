@@ -1,65 +1,80 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
 
 const Home = () => {
-    const {user} = useAuthContext()
-    const [allCharacters, setAllCharacters] = useState([]);
-    const [sortOrder, setSortOrder] = useState();
-    
+
+    const { user } = useAuthContext()
+    const [allCharacters, setAllCharacters] = useState([])
+    const [sortedCharacters, setSortedCharacters] = useState([])
+    const [sortOrder, setSortOrder] = useState()
+
 
     useEffect(() => {
-        axios
-            .get('http://localhost:4000/api/characters/all')
-            .then((res) => {
-                console.log(res);
-                setAllCharacters(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+    axios
+        .get('http://localhost:4000/api/characters/all')
+        .then((res) => {
+        console.log(res)
+        setAllCharacters(res.data)
+        setSortedCharacters(res.data)
+        })
+        .catch((err) => {
+        console.log(err)
+    })
+}, [])
 
     useEffect(() => {
-        const characterOrder = [...allCharacters].sort((first, last) => {
-            const oldest = new Date(first.createdAt);
-            const newest = new Date(last.createdAt);
-            if (sortOrder === 'oldest') {
-                return oldest - newest
-            }  else {
-                return newest - oldest;
-            }
-        });
-        setAllCharacters(characterOrder);
-    }, [sortOrder]);
+    if (sortOrder === 'oldest') {
+        setSortedCharacters([...allCharacters].sort((first, last) => {
+        const oldest = new Date(first.createdAt)
+        const newest = new Date(last.createdAt)
+        return oldest - newest
+    }))
+    } else {
+        setSortedCharacters([...allCharacters].sort((first, last) => {
+        const oldest = new Date(first.createdAt)
+        const newest = new Date(last.createdAt)
+        return newest - oldest
+    }))
+    }
+}, [sortOrder, allCharacters])
 
     const sortByOldest = () => {
-        setSortOrder('oldest')
-    }
+    setSortOrder('oldest')
+}
 
     const sortByNewest = () => {
-        setSortOrder('newest')
+    setSortOrder('newest')
     }
 
     const deleteHandler = (id) => {
+
         axios
           .delete(`http://localhost:4000/api/characters/delete/${id}`)
           .then((res) => {
-
+            // Perform any necessary actions after successful deletion
+            axios
+              .get(`http://localhost:4000/api/characters/all`)
+              .then((res) => {
+                setAllCharacters(res.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           })
           .catch((err) => {
             console.log(err);
           });
       };
 
-      useEffect(() => {
-        axios.get(`http://localhost:4000/api/characters/all`)
-        .then((res) => {
-            setAllCharacters(res.data)
-        })
-        .catch((err) => console.log(err))
-      }, [deleteHandler])
+      const editPage = (id) => {
+        navigate(`/characters/edit/${id}`);
+      };
+      
+      
+      
 return (
     <div className="home">
         <div className="characters">
@@ -69,11 +84,12 @@ return (
                     <Character key={character._id} 
                     character = {character}
                     onDelete={() => deleteHandler(character._id)}
+                    onEdit={() => editPage(character._id)}
+
                     />
-                    
                 ))}
+            </div>
         </div>
-    </div>
     )
 }
 

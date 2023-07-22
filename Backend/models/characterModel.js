@@ -29,8 +29,10 @@ const characterSchema = new Schema({
     },
     characterName: {
         type: String,
-        required: true
+        required: [true, 'Character name is required'],
+        maxLength: [20, 'Character name must be 20 characters or less']
     },
+    
     HP: {
         type: Number,
         required: true
