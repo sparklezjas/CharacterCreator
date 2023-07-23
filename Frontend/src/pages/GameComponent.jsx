@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import SecondPage from "./SecondPage"
 
 const GameComponent = () => {
   const correctPhrase = "The young elf was in a forest and suddenly heard a rustle in the bushes."
