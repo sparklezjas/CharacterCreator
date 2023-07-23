@@ -29,6 +29,12 @@ userSchema.statics.signup = async function(name, email, password) {
     if (!name || !email || !password ) {
     throw Error('All fields must be filled')
     }
+    if (!name) {
+        throw new Error('Name field must be filled');
+    }
+    if (name.length > 30) {
+        throw new Error('Name must be 30 characters or less');
+    }
     if (!validator.isEmail(email)) {
     throw Error('Email not valid')
     }
