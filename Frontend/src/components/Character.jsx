@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import play from '../images/buttons/play.png'
+import update from '../images/buttons/update.png'
+import deleteB from '../images/buttons/delete.png'
 import '../CSS/CharacterCreator.css'
 
 const Character = ({character, onDelete, onEdit}) => {
@@ -98,28 +101,52 @@ useEffect(() => {
   }, [character.weapon])
 
     return (
-    <div className="character_div">
-      <h2>{character.characterName}</h2>
+    <div className="character_div"
+    // style={{border:"red solid 2px"}}
+    >
+      <h2
+      className='characterTitle'
+      style={{color:"white"}}
+      >{character.characterName}</h2>
       {headImage && <img src={headImage} alt="head" className="char_head" />}
       {faceImage && <img src={faceImage} alt="face" className="char_face" />}
       {bodyImage && <img src={bodyImage} alt="body" className="char_body" />}
       <div className='right_arm_div grouped_char_piece'>
       {armRightImage && <img src={armRightImage} alt="armRight" className="char_right_arm" />}
-
-
       {handRightImage && <img src={handRightImage} alt="handRight" className="char_right_hand" />}
     </div>
+      
     <div className='left_arm_div grouped_char_piece'>
-      {armLeftImage && <img src={armLeftImage} alt="armLeft" className="char_left_arm" />}
-      {handLeftImage && <img src={handLeftImage} alt="handLeft" className="char_left_hand" />}
+    {armLeftImage && <img src={armLeftImage} alt="armLeft" className="char_left_arm" />}
+    {handLeftImage && <img src={handLeftImage} alt="handLeft" className="char_left_hand" />}
+    </div>
+      
+      
+    <div className="grouped_char_piece leg_div">
+    {legRightImage && <img src={legRightImage} alt="leg" className="char_right_leg" />}
+    {legLeftImage && <img src={legLeftImage} alt="leg" className="char_left_leg" />}
+    </div>
+    
+    {weaponImage && <img src={weaponImage} alt="weapon" className="char_weapon" />}
+      
+      
+      <div>
+        <button
+         className="playButton actionButtons"
+         style={{backgroundImage:`url(${play})`}}
+        ></button>
+
+        <button onClick={onEdit}
+         className="updateButton actionButtons"
+         style={{backgroundImage:`url(${update})`}}
+        ></button>
+        
+        <button onClick={onDelete}
+         className="deleteButton actionButtons"
+         style={{backgroundImage:`url(${deleteB})`}}
+        ></button>
+
       </div>
-      <div className="grouped_char_piece leg_div">
-      {legRightImage && <img src={legRightImage} alt="leg" className="char_right_leg" />}
-      {legLeftImage && <img src={legLeftImage} alt="leg" className="char_left_leg" />}
-      </div>
-      {weaponImage && <img src={weaponImage} alt="weapon" className="char_weapon" />}
-      <button onClick={onDelete}>Delete</button>
-      <button onClick={onEdit}>Edit</button>
     </div>
   )
 }

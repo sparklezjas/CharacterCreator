@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import '../CSS/Home.css'
 import Character from "../components/Character"
 import newest from "../images/buttons/newest.png"
 import oldest from '../images/buttons/oldest.png'
+import frameAll from '../images/frameAll.png'
+import dungeon from '../images/dungeon.jpg'
+import welcome from '../images/keyboard.png'
+import create from '../images/buttons/create.png'
+
 
 const Home = () => {
 
@@ -13,7 +19,6 @@ const Home = () => {
     const [allCharacters, setAllCharacters] = useState([])
     const [sortedCharacters, setSortedCharacters] = useState([])
     const [sortOrder, setSortOrder] = useState()
-    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -74,18 +79,44 @@ const Home = () => {
       
 
     return (
-        <div className="home">
-            <button onClick={sortByNewest}>Newest</button>
-            <button onClick={sortByOldest}>Oldest</button>
-            <div className="characters-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div>
+        <img className='welcomeGraphic' src={welcome} alt="welcome keyboard screen" />
+        <p className="sortTitle">SORT CHAMPS BY</p>
+        <div className="sortButtons">
+            <button onClick={sortByNewest}
+            className="newestButton"
+            style={{backgroundImage:`url(${newest})`}}
+            ></button>
+
+            <button onClick={sortByOldest}
+            className="oldestButton"
+            style={{backgroundImage:`url(${oldest})`}}
+            ></button>
+        </div>
+
+        <div className="home" style={{backgroundImage:`url(${dungeon})`}}>
+            <div className="characterContainer">
                 {sortedCharacters && sortedCharacters.map((character) => (
-                    <Character key={character._id}
+                <div className="characterFrame">
+                    <div key={character._id} className="characters">
+                    <Character
                         character={character}
                         onDelete={() => deleteHandler(character._id)}
                     />
+                    </div>
+                </div>
                 ))}
             </div>
         </div>
+    <div>
+        <h2 className="pickHeroTitle">Choose your hero or create a new one!</h2>
+        <Link to='/characters/new'>
+            <button className='lgCreateButton'
+                type='button'
+                style={{backgroundImage:`url(${create})`}}/>
+        </Link>
+        </div>
+    </div>
     )
 }
 
