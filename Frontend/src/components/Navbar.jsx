@@ -6,7 +6,9 @@ import '../CSS/Navbar.css'
 import login from '../images/buttons/login.png'
 import logoutB from '../images/buttons/logout.png'
 import register from '../images/buttons/register.png'
+import woodHeader from '../images/header-bar.png'
 import woodBkgd from '../images/woodBkgd.jpg'
+
 
 
 const Navbar = () => {
@@ -20,21 +22,26 @@ const Navbar = () => {
     return (
         <header>
             <div className="container"
-            // style={{backgroundImage:`url(${woodBkgd})`}}
+            style={{backgroundImage:`url(${woodHeader})`, height:"80px"}}
             >
 
                 <Link to="/">
-                    <h1 style={{color:"black"}}>THE TYPING TRIALS</h1>
+                    <h1 style={{color:"black", marginLeft:"20px"}}></h1>
                 </Link>
-                <nav>
+                <nav style={{display:"flex"}}>
                     {user && (
                         <div>
-                            <span className='userInfo'>{user.email}</span>
-                            <button className='authButtons logoutBtn' type='button'
-                                style={{backgroundImage:`url(${logoutB})`}}
-                                onClick={handleClick}/>
+                            <span className='userInfo'>
+                            Hello, {user.email}!</span>
                         </div>
-                    )}
+                         )}
+
+                        <div>
+                        <button className='authButtons logoutBtn' type='button'
+                            style={{backgroundImage:`url(${logoutB})`}}
+                            onClick={handleClick}/>
+                        </div>
+                   
                     {!user && (
                         <div className='authButtons'>
                             <Link to="/login">

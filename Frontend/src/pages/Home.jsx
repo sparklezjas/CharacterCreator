@@ -3,9 +3,12 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
+import newest from "../images/buttons/newest.png"
+import oldest from '../images/buttons/oldest.png'
 
 const Home = () => {
 
+    const navigate = useNavigate()
     const { user } = useAuthContext()
     const [allCharacters, setAllCharacters] = useState([])
     const [sortedCharacters, setSortedCharacters] = useState([])

@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <LogoSign/>
+        {/* <LogoSign/> */}
         <div className="pages">
           <Routes>
             <Route
