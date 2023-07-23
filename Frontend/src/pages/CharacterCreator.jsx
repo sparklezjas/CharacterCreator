@@ -35,6 +35,7 @@ import weaponR from '../images/buttons/weaponR.png'
 import randomBtn from '../images/buttons/randomize.png'
 import createBtn from '../images/buttons/create.png'
 import homeBtn from '../images/buttons/home.png'
+import CreateSign from '../components/CreateSign';
 
 
 
@@ -176,7 +177,7 @@ useEffect(() => {
 
 
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const character = {
       head: character_types[headIndex],
       face: character_types[faceIndex],
@@ -186,144 +187,162 @@ useEffect(() => {
       weapon: character_types[weaponIndex],
       characterName,
       HP: 100,
-    }
-    console.log('Character data to be sent:', character);
+    };
+  
     const response = await fetch('http://localhost:4000/api/characters/new', {
       method: 'POST',
       body: JSON.stringify(character),
       headers: {
-        'Content-Type' : 'application/json'
-      }
-    })
-    const data = await response.json()
-
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    const data = await response.json();
+  
     if (!response.ok) {
-      setErrors(data.error)
-  }
-  if (response.ok) {
-      setHead(character_types[headIndex])
-      setFace(character_types[faceIndex])
-      setBody(character_types[bodyIndex])
-      setArms(character_types[armsIndex])
-      setLegs(character_types[legsIndex])
-      setWeapon(character_types[weaponIndex])
-      setCharacterName('')
-      setHP(100)
-      setErrors(null)
-      navigate('/characters/all')
-  }
-}
+      if (data.error && data.error.characterName) {
+        setErrors({ characterName: data.error.characterName });
+      } else {
+        setErrors({});
+      }
+    } else {
+      setErrors({});
+      setHead(character_types[headIndex]);
+      setFace(character_types[faceIndex]);
+      setBody(character_types[bodyIndex]);
+      setArms(character_types[armsIndex]);
+      setLegs(character_types[legsIndex]);
+      setWeapon(character_types[weaponIndex]);
+      setCharacterName('');
+      setHP(100);
+      navigate('/characters/all');
+    }
+  };
+  
 
 
   return (
     
     <div className='screenBackground'
-    style={{backgroundImage:`url(${woodBkgd})`}}>
-      <div >
-        <form className="character_div" onSubmit={submitHandler}>
+    // style={{backgroundImage:`url(${woodBkgd})`}}
+    >
+
+      <CreateSign/>
+
+      <form className="character_div" onSubmit={submitHandler}>
 
 
-  {/* CHARACTER -------------------------------------------------------- */}
+{/* CHARACTER -------------------------------------------------------- */}
 
-          {headImage && <img src={headImage}
-          alt="head" className="char_head" />}
+        {headImage && <img src={headImage}
+        alt="head" className="char_head" />}
 
-          {bodyImage && <img src={bodyImage}
-          alt="body" className="char_body" />}
+        {bodyImage && <img src={bodyImage}
+        alt="body" className="char_body" />}
 
-          {faceImage && <img src={faceImage}
-          alt="face" className="char_face" />}
+        {faceImage && <img src={faceImage}
+        alt="face" className="char_face" />}
 
-          <div className="right_arm_div grouped_char_piece">
-          {armRightImage && <img src={armRightImage}
-          alt="arm" className="char_right_arm" />}
-          {handRightImage && <img src={handRightImage}
-          alt="hand" className="char_right_hand" />}
-          </div>
+        <div className="right_arm_div grouped_char_piece">
+        {armRightImage && <img src={armRightImage}
+        alt="arm" className="char_right_arm" />}
+        {handRightImage && <img src={handRightImage}
+        alt="hand" className="char_right_hand" />}
+        </div>
 
-          <div className="left_arm_div grouped_char_piece">
-          {armLeftImage && <img src={armLeftImage}
-          alt="arm" className="char_left_arm" />}
-          {handLeftImage && <img src={handLeftImage}
-          alt="hand" className="char_left_hand" />}
-          </div>
+        <div className="left_arm_div grouped_char_piece">
+        {armLeftImage && <img src={armLeftImage}
+        alt="arm" className="char_left_arm" />}
+        {handLeftImage && <img src={handLeftImage}
+        alt="hand" className="char_left_hand" />}
+        </div>
 
-          <div className="grouped_char_piece leg_div">
-          {legRightImage && <img src={legRightImage}
-          alt="leg" className="char_right_leg" />}
-          {legLeftImage && <img src={legLeftImage}
-          alt="leg" className="char_left_leg" />}
-          </div>
-          
-          {weaponImage && <img src={weaponImage}
-          alt="weapon" className="char_weapon" />}
+        <div className="grouped_char_piece leg_div">
+        {legRightImage && <img src={legRightImage}
+        alt="leg" className="char_right_leg" />}
+        {legLeftImage && <img src={legLeftImage}
+        alt="leg" className="char_left_leg" />}
+        </div>
+        
+        {weaponImage && <img src={weaponImage}
+        alt="weapon" className="char_weapon" />}
 
 
-  {/* BUTTONS -------------------------------------------------------- */}
+{/* BUTTONS -------------------------------------------------------- */}
 
-          {/* <button type="button" 
-          onClick={() => change_character_piece(-1, 'Head')}
-          className="char_button button_left head_button">
-          ←Head</button>
+        {/* <button type="button" 
+        onClick={() => change_character_piece(-1, 'Head')}
+        className="char_button button_left head_button">
+        ←Head</button>
 
-          <button type="button" 
-          onClick={() => change_character_piece(1, 'Head')}
-          className="char_button button_right head_button">
-          Head→</button>
+        <button type="button" 
+        onClick={() => change_character_piece(1, 'Head')}
+        className="char_button button_right head_button">
+        Head→</button>
 
-          <button type="button" 
-          onClick={() => change_character_piece(-1, 'Face')}
-          className="char_button button_left face_button">
-          ←Face</button>
+        <button type="button" 
+        onClick={() => change_character_piece(-1, 'Face')}
+        className="char_button button_left face_button">
+        ←Face</button>
 
-          <button type="button" onClick={() => change_character_piece(1, 'Face')}
-          className="char_button button_right face_button">
-          Face→</button>
+        <button type="button" onClick={() => change_character_piece(1, 'Face')}
+        className="char_button button_right face_button">
+        Face→</button>
 
-          <button type="button" onClick={() => change_character_piece(-1, 'Body')}
-          className="char_button button_left body_button">
-          ←Body</button>
+        <button type="button" onClick={() => change_character_piece(-1, 'Body')}
+        className="char_button button_left body_button">
+        ←Body</button>
 
-          <button type="button" onClick={() => change_character_piece(1, 'Body')}
-          className="char_button button_right body_button">
-          Body→</button>
+        <button type="button" onClick={() => change_character_piece(1, 'Body')}
+        className="char_button button_right body_button">
+        Body→</button>
 
-          <button type="button" onClick={() => change_character_piece(-1, 'Arms')}
-          className="char_button button_left arm_button">
-          ←Arms</button>
+        <button type="button" onClick={() => change_character_piece(-1, 'Arms')}
+        className="char_button button_left arm_button">
+        ←Arms</button>
 
-          <button type="button" onClick={() => change_character_piece(1, 'Arms')}
-          className="char_button button_right arm_button">
-          Arms→</button>
+        <button type="button" onClick={() => change_character_piece(1, 'Arms')}
+        className="char_button button_right arm_button">
+        Arms→</button>
 
-          <button type="button" onClick={() => change_character_piece(-1, 'Legs')}
-          className="char_button button_left leg_button">
-          ←Legs</button>
+        <button type="button" onClick={() => change_character_piece(-1, 'Legs')}
+        className="char_button button_left leg_button">
+        ←Legs</button>
 
-          <button type="button" onClick={() => change_character_piece(1, 'Legs')}
-          className="char_button button_right leg_button">
-          Legs→</button>
+        <button type="button" onClick={() => change_character_piece(1, 'Legs')}
+        className="char_button button_right leg_button">
+        Legs→</button>
 
-          <button type="button" onClick={() => change_character_piece(-1, 'Weapon')}
-          className="char_button button_left weapon_button">
-          ←Weapon</button>
+        <button type="button" onClick={() => change_character_piece(-1, 'Weapon')}
+        className="char_button button_left weapon_button">
+        ←Weapon</button>
 
-          <button type="button" onClick={() => change_character_piece(1, 'Weapon')}
-          className="char_button button_right weapon_button">
-          Weapon→</button> */}
+        <button type="button" onClick={() => change_character_piece(1, 'Weapon')}
+        className="char_button button_right weapon_button">
+        Weapon→</button> */}
 
-          {/* <input type="text" className='nameField' onChange={(e) => setCharacterName(e.target.value)}
-          value={characterName} /> */}
+        {/* <input type="text" className='nameField' onChange={(e) => setCharacterName(e.target.value)}
+        value={characterName} /> */}
 
-          {/* <button className='submit_button char_button'
-          type='submit'>Submit</button> */}
+        {/* <button className='submit_button char_button'
+        type='submit'>Submit</button> */}
 
-          <button className='selectButtons createBtn'
-          type='submit'
-          style={{backgroundImage:`url(${createBtn})`}}/>
+        <button className='selectButtons createBtn'
+        type='submit'
+        style={{backgroundImage:`url(${createBtn})`}}/>
 
-        </form>
-      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </form>
+
 
 
 {/* REVISION -------------------------------------------------------- */}
@@ -394,7 +413,15 @@ useEffect(() => {
       <div className='characterName'>
         <input type="text" className='enterName'
         onChange={(e) => setCharacterName(e.target.value)}
-        value={characterName} />
+        value={characterName}/>
+        {errors.characterName ? 
+        <p style={{color:"red", fontSize:"10pt", margin:"-5px", zIndex:"20"}}>
+        {errors.characterName.message}</p> : null}
+        
+        {/* {errors.characterName && (
+        <p style={{ color: 'red', fontSize: '10pt', margin: '-5px' }}>
+        {errors.characterName.message}</p>)} */}
+
       </div>
 
 
