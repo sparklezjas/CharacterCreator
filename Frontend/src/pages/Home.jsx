@@ -13,8 +13,6 @@ const Home = () => {
     const [allCharacters, setAllCharacters] = useState([])
     const [sortedCharacters, setSortedCharacters] = useState([])
     const [sortOrder, setSortOrder] = useState()
-    const navigate = useNavigate()
-
 
     useEffect(() => {
         axios
