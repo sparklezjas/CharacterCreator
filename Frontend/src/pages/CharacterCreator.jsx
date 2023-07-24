@@ -35,7 +35,7 @@ import weaponR from '../images/buttons/weaponR.png'
 import randomBtn from '../images/buttons/randomize.png'
 import createBtn from '../images/buttons/create.png'
 import homeBtn from '../images/buttons/home.png'
-import CreateSign from '../components/CreateSign';
+import CreateSign from '../components/CreateSign'
 
 
 

@@ -167,8 +167,8 @@ button {
   width: 800px;
   margin: 150px 0px 0px 320px;
   z-index: 2;
-
 }
+
 
 .portal {
   width: 500px;
@@ -241,6 +241,10 @@ button {
   margin: -390px 0px 0px 350px;
 }
 
+.leftSignsEdit {
+  top: 600px;
+}
+
 .lBody {
   margin-left: 15px;
 }
@@ -260,6 +264,10 @@ button {
 .rightSigns {
   position: absolute;
   margin: -390px 0px 0px 900px;
+}
+
+.rightSignsEdit {
+  top: 600px;
 }
 
 .rHead {
@@ -376,6 +384,37 @@ button {
 .error-message {
   color: red;
   font-size: 18px;
-  margin-left: -65px;
+  text-align: center;
   margin-top: 10px;
+}
+
+
+/* EDIT PAGE ------------------------------------ */
+
+
+.frameEdit {
+  width: 850px;
+  margin: 52px 0px 0px 280px;
+  z-index: 1;
+}
+
+.selectButtonsEdit {
+  top: 580px;
+}
+
+.saveButtonEdit {
+  top: 297px;
+  left: -260px;
+}
+
+.characterNameEdit {
+  top: 555px;
+}
+
+.cancelButton {
+  left: -26px;
+}
+
+.cancelButton:hover {
+  filter: brightness(.9) contrast(1.1);
 }
