@@ -204,7 +204,10 @@ useEffect(() => {
       setLegLeftImage(legModuleL.default)
       setWeaponImage(weaponModule.default)
     };
-    randomCharacter();
+    if(randomClick != 0) {
+
+      randomCharacter();
+    }
   }, [randomClick]);
 
   const random_indexes = () =>{
