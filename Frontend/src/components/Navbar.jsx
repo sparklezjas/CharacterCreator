@@ -43,22 +43,14 @@ const Navbar = () => {
                         </div>
                    
                     {!user && (
-                        <div className='authButtons'>
-                            <Link to="/login">
-                                <button className='authButtons loginBtn' type='button'
-                                style={{backgroundImage:`url(${login})`}}/>
-                            </Link>
+                        <div >
+                          
 
-                            <Link to="/signup">
-                                <button className='authButtons registerBtn' type='button'
-                                style={{backgroundImage:`url(${register})`}}/>
-                            </Link>
-
-                            <Link to="/login">
+                            {/* <Link to="/login">
                                 <button className='authButtons logoutBtn' type='button'
                                 style={{backgroundImage:`url(${logoutB})`}}
                                 onClick={handleClick}/>
-                            </Link>
+                            </Link> */}
                         </div>
                     )}
                 </nav>
