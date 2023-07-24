@@ -123,6 +123,14 @@ useEffect(() => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (!characterName.trim()) {
+      setErrors({ characterName: 'Character name is required' })
+      return
+    }
+    if (characterName.length > 20) {
+      setErrors({ characterName: 'Name must be 20 characters or less' })
+      return
+    }
     const character = {
       head: character_types[headIndex],
       face: character_types[faceIndex],
@@ -137,7 +145,7 @@ useEffect(() => {
   
     try {
       const response = await fetch(`http://localhost:4000/api/characters/edit/${id}`, {
-        method: 'PATCH', // Use PATCH method instead of POST
+        method: 'PATCH',
         body: JSON.stringify(character),
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +157,7 @@ useEffect(() => {
         setErrors(data.error);
       }
       if (response.ok) {
-        // Handle success, e.g., show a success message
+
         console.log('Character updated successfully!');
         navigate('/characters/all');
       }
@@ -278,6 +286,7 @@ useEffect(() => {
       <button type="button" onClick={() => change_character_piece(1, 'Weapon')} className="char_button button_right weapon_button">
         Weapon→
       </button>
+      <div className="error">{errors.characterName}</div>
       <input type="text" onChange={(e) => setCharacterName(e.target.value)} value={characterName} />
       <button className='submit_button char_button'  type='submit'>Submit</button>
     </form>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import play from '../images/buttons/play.png'
 import update from '../images/buttons/update.png'
 import deleteB from '../images/buttons/delete.png'
@@ -15,7 +16,7 @@ const Character = ({character, onDelete, onEdit}) => {
     const [legRightImage, setLegRightImage] = useState(null);
     const [legLeftImage, setLegLeftImage] = useState(null);
     const [weaponImage, setWeaponImage] = useState(null);
-
+  
     useEffect(() => {
         const loadHeadImage = async () => {
           try {
@@ -103,10 +104,9 @@ useEffect(() => {
     return (
     <div className="character_div"
     // style={{border:"red solid 2px"}}
-    >
+    > 
       <h2
       className='characterTitle'
-      style={{color:"white"}}
       >{character.characterName}</h2>
       {headImage && <img src={headImage} alt="head" className="char_head" />}
       {faceImage && <img src={faceImage} alt="face" className="char_face" />}
@@ -136,11 +136,13 @@ useEffect(() => {
          style={{backgroundImage:`url(${play})`}}
         ></button>
 
-        <button onClick={onEdit}
-         className="updateButton actionButtons"
-         style={{backgroundImage:`url(${update})`}}
-        ></button>
-        
+    <Link to={`/characters/edit/${character._id}`}>
+          <button
+            className="updateButton actionButtons"
+            style={{ backgroundImage: `url(${update})` }}
+            onClick={onEdit}
+          ></button>
+        </Link>
         <button onClick={onDelete}
          className="deleteButton actionButtons"
          style={{backgroundImage:`url(${deleteB})`}}

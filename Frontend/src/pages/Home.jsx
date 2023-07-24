@@ -71,13 +71,11 @@ const Home = () => {
         })
 }
 
-      const editPage = (id) => {
+    const editPage = (id) => {
         navigate(`/characters/edit/${id}`);
-      };
-      
-      
-      
-
+    };
+    
+    
     return (
     <div>
         <img className='welcomeGraphic' src={welcome} alt="welcome keyboard screen" />
@@ -102,6 +100,7 @@ const Home = () => {
                     <Character
                         character={character}
                         onDelete={() => deleteHandler(character._id)}
+                        onEdit={() => editPage(character._id)}
                     />
                     </div>
                 </div>
