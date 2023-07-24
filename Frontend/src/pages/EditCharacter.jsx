@@ -4,7 +4,7 @@ import '../CSS/CharacterCreator.css'
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-const character_types = ['dark_elf_1', 'minotaur_1', 'goblin_1', 'citizen_women_1'];
+const character_types = ['anubis', 'assassin_guy', 'black_ninja', 'citizen_women_1', 'citizen_women_2', 'citizen_women_3', 'dark_elf_1', 'dark_elf_3', 'egyptian_mummy', 'egyptian_sentry', 'ghost_pirate_1',  'ghost_pirate_2', 'goblin_1', 'goblin_3', 'medieval_king', 'medieval_knight', 'medieval_sergeant', 'minotaur_1', 'minotaur_2',  'villager_1', 'villager_3',  'white_armored_knight', 'white_ninja'];
 const EditCharacter = () => {
   const navigate = useNavigate()
   const { id } = useParams();

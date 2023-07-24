@@ -39,7 +39,7 @@ import CreateSign from '../components/CreateSign';
 
 
 
-const character_types = ['dark_elf_1', 'minotaur_1', 'goblin_1', 'citizen_women_1'];
+const character_types = ['anubis', 'assassin_guy', 'black_ninja', 'citizen_women_1', 'citizen_women_2', 'citizen_women_3', 'dark_elf_1', 'dark_elf_3', 'egyptian_mummy', 'egyptian_sentry', 'ghost_pirate_1',  'ghost_pirate_2', 'goblin_1', 'goblin_3', 'medieval_king', 'medieval_knight', 'medieval_sergeant', 'minotaur_1', 'minotaur_2',  'villager_1', 'villager_3',  'white_armored_knight', 'white_ninja'];
 const CharacterCreator = () => {
 
 
@@ -56,25 +56,26 @@ const CharacterCreator = () => {
   const [errors, setErrors] = useState({})
 
 
-  const [headIndex, setHeadIndex] = useState(0);
+  const [headIndex, setHeadIndex] = useState(3);
   const [headImage, setHeadImage] = useState(darkElfHead);
-  const [faceIndex, setFaceIndex] = useState(0);
+  const [faceIndex, setFaceIndex] = useState(3);
   const [faceImage, setFaceImage] = useState(darkElfFace);
-  const [bodyIndex, setBodyIndex] = useState(0);
+  const [bodyIndex, setBodyIndex] = useState(3);
   const [bodyImage, setBodyImage] = useState(darkElfBody);
   
 
-  const [armsIndex, setArmsIndex] = useState(0);
+  const [armsIndex, setArmsIndex] = useState(3);
   const [armRightImage, setArmRightImage] = useState(darkElfRightArm);
   const [handRightImage, setHandRightImage] = useState(darkElfRightHand);
   const [armLeftImage, setArmLeftImage] = useState(darkElfLeftArm);
   const [handLeftImage, setHandLeftImage] = useState(darkElfLeftHand);
-  const [legsIndex, setLegsIndex] = useState(0);
+  const [legsIndex, setLegsIndex] = useState(3);
   const [legRightImage, setLegRightImage] = useState(darkElfRightLeg);
   const [legLeftImage, setLegLeftImage] = useState(darkElfLeftLeg);
-  const [weaponIndex, setWeaponIndex] = useState(0);
+  const [weaponIndex, setWeaponIndex] = useState(3);
   const [weaponImage, setWeaponImage] = useState(darkElfWeapon);
 
+  const [randomClick, setrandomClick] = useState(0)
 
   const change_character_piece = async (index_change, body_part) => {
     if (body_part === 'Head') {
@@ -175,7 +176,49 @@ useEffect(() => {
     return index;
   };
 
+  // Randomizer
+  useEffect(() => {
+    const randomCharacter = async () => {
+      random_indexes()
+      const [headModule, faceModule, bodyModule, armModuleR, armModuleL, handModuleR, handModuleL, legModuleR, legModuleL, weaponModule] = await Promise.all([
+        import(`../images/${character_types[headIndex]}/Head.png`),
+        import(`../images/${character_types[faceIndex]}/Face 01.png`),
+        import(`../images/${character_types[bodyIndex]}/Body.png`),
+        import(`../images/${character_types[armsIndex]}/Right Arm.png`),
+        import(`../images/${character_types[armsIndex]}/Left Arm.png`),
+        import(`../images/${character_types[armsIndex]}/Right Hand.png`),
+        import(`../images/${character_types[armsIndex]}/Left Hand.png`),
+        import(`../images/${character_types[legsIndex]}/Right Leg.png`),
+        import(`../images/${character_types[legsIndex]}/Left Leg.png`),
+        import(`../images/${character_types[weaponIndex]}/Weapon.png`),
 
+      ]);
+      setHeadImage(headModule.default)
+      setFaceImage(faceModule.default)
+      setBodyImage(bodyModule.default)
+      setArmRightImage(armModuleR.default)
+      setArmLeftImage(armModuleL.default)
+      setHandRightImage(handModuleR.default)
+      setHandLeftImage(handModuleL.default)
+      setLegRightImage(legModuleR.default)
+      setLegLeftImage(legModuleL.default)
+      setWeaponImage(weaponModule.default)
+    };
+    randomCharacter();
+  }, [randomClick]);
+
+  const random_indexes = () =>{
+    setHeadIndex(Math.floor((Math.random() * character_types.length)))
+    setFaceIndex(Math.floor((Math.random() * character_types.length)))
+    setBodyIndex(Math.floor((Math.random() * character_types.length)))
+    setArmsIndex(Math.floor((Math.random() * character_types.length)))
+    setLegsIndex(Math.floor((Math.random() * character_types.length)))
+    setWeaponIndex(Math.floor((Math.random() * character_types.length)))
+
+}
+
+
+  // Submitting Form
   const submitHandler = async (e) => {
     e.preventDefault();
     const character = {
@@ -436,7 +479,8 @@ useEffect(() => {
 
       <button className='selectButtons randomizeBtn'
         type='button' 
-        style={{backgroundImage:`url(${randomBtn})`}}/>
+        style={{backgroundImage:`url(${randomBtn})`}}
+        onClick={() => setrandomClick((prevRandomClick) => prevRandomClick + 1)}/>
 
       {/* <button className='selectButtons createBtn'
         type='submit'
