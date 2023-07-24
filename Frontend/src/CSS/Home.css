@@ -23,10 +23,6 @@ background-repeat: no-repeat;
     position: absolute;
 }
 
-/* .characterContainer::-webkit-scrollbar {
-    scrollbar-color: tan;
-} */
-
 .characterFrame {
     /* scale: 80%; */
     /* width: 300px;
