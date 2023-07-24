@@ -44,7 +44,7 @@ const Login = () => {
             <input
                 className="signupEmail2 signupFields"
                 type="email"
-                // placeholder="ENTER EMAIL HERE..."
+                placeholder="..."
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
@@ -52,7 +52,7 @@ const Login = () => {
             <input
                 className="signupPassword2 signupFields"
                 type="password"
-                // placeholder="ENTER PASSWORD HERE..."
+                placeholder="..."
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />

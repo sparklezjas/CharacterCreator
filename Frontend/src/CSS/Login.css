@@ -46,8 +46,11 @@
     padding: 3px 5px 5px 5px;
     font-family: cursive;
     font-size: 16pt;
+    background: none;
+    font-weight: bold;
     text-align: center;
     border: none;
+    border-color: transparent;
     border-radius: 10px;
     position: absolute;
     transform: rotate(-5deg);
