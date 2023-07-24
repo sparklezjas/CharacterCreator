@@ -206,12 +206,12 @@ useEffect(() => {
         setErrors({});
       }
       if (!characterName.trim()) {
-        setErrors({ characterName: { message: 'Character name is required.' } });
+        setErrors({ characterName: { message: `WOAH THERE! You must name your champion!` } });
         return;
       }
   
       if (characterName.length > 20) {
-        setErrors({ characterName: { message: 'Name must be 20 characters or less.' } });
+        setErrors({ characterName: { message: `Keep hero names to 20 characters or less.` } });
         return;
       }
     } else {
