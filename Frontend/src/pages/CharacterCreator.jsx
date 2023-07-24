@@ -205,6 +205,15 @@ useEffect(() => {
       } else {
         setErrors({});
       }
+      if (!characterName.trim()) {
+        setErrors({ characterName: { message: 'Character name is required.' } });
+        return;
+      }
+  
+      if (characterName.length > 20) {
+        setErrors({ characterName: { message: 'Name must be 20 characters or less.' } });
+        return;
+      }
     } else {
       setErrors({});
       setHead(character_types[headIndex]);
@@ -415,7 +424,7 @@ useEffect(() => {
         onChange={(e) => setCharacterName(e.target.value)}
         value={characterName}/>
         {errors.characterName ? 
-        <p style={{color:"red", fontSize:"10pt", margin:"-5px", zIndex:"20"}}>
+        <p className='error-message'>
         {errors.characterName.message}</p> : null}
         
         {/* {errors.characterName && (
