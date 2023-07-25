@@ -10,6 +10,7 @@ import GameComponent from './pages/GameComponent'
 import SecondPage from './pages/SecondPage'
 import Fight from './pages/Fight'
 import AudioPlayer from './components/AudioPlayer'
+import GameCharacter from './components/GameCharacter'
 
 function App() {
   const { user } = useAuthContext()
@@ -43,13 +44,13 @@ function App() {
               path="/characters/edit/:id"
               element={!user ? <Login /> : <EditCharacter/>}/>
           <Route
-              path="/typingtrials"
+              path="/typingtrials/:id"
               element={!user ? <Login /> : <GameComponent/>}/>  
           <Route
-              path="/typingtrials2"
+              path="/typingtrials2/:id"
               element={!user ? <Login /> : <SecondPage/>}/>  
           <Route
-              path="/typingtrials3"
+              path="/typingtrials3/:id"
               element={!user ? <Login /> : <Fight/>}/>  
               
           </Routes>

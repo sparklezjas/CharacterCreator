@@ -129,12 +129,14 @@ useEffect(() => {
     
     {weaponImage && <img src={weaponImage} alt="weapon" className="char_weapon" />}
       
-      
+    
       <div>
+      <Link to={`/typingtrials/${character._id}`}>
         <button
          className="playButton actionButtons"
          style={{backgroundImage:`url(${play})`}}
         ></button>
+        </Link>
 
     <Link to={`/characters/edit/${character._id}`}>
           <button
