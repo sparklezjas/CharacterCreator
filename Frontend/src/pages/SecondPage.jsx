@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import GameCharacter from "../components/GameCharacter";
+import { useParams, Link } from 'react-router-dom';
 
 
 const SecondPage = () => {
-  const correctPhrase = "The elf moved towards the bushes, and out popped a giant minotaur!"
+  const { id } = useParams();
+  const correctPhrase = "The elf moved towards the bushes, and out popped a giant skeleton weaing a mario red shell looking thingy!"
   const [inputValue, setInputValue] = useState("")
   const [showPopup, setShowPopup] = useState(false)
   const [showTryAgain, setShowTryAgain] = useState(false)
@@ -57,8 +60,8 @@ const SecondPage = () => {
     }
   }
 
-  const handleGoToSecondPage = () => {
-    navigate("/typingtrials3")
+  const handleGoToSecondPage = (id) => {
+    navigate(`/typingtrials3/${id}`)
   }
 
   return (
@@ -79,7 +82,7 @@ const SecondPage = () => {
             <>
               <p>Great job!</p>
               {showGoToSecondPage && (
-                <button onClick={handleGoToSecondPage}>Fight!</button>
+                <button onClick={() => handleGoToSecondPage(id)}>Fight!</button>
               )}
             </>
           ) : (
@@ -93,6 +96,9 @@ const SecondPage = () => {
       )}
 
       {timeLeft > 0 && !showPopup && <p>Time left: {timeLeft} seconds</p>}
+      <div className="pull_up">
+      <GameCharacter/>
+      </div>
     </div>
   );
 };

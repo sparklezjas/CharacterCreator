@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import GameCharacter from "../components/GameCharacter"
+import { useParams, Link } from 'react-router-dom';
 
 const GameComponent = () => {
+  const { id } = useParams();
   const correctPhrase = "The young elf was in a forest and suddenly heard a rustle in the bushes."
   const [inputValue, setInputValue] = useState("")
   const [showPopup, setShowPopup] = useState(false)
@@ -56,12 +59,13 @@ const GameComponent = () => {
     }
   }
 
-  const handleGoToSecondPage = () => {
-    navigate("/typingtrials2")
+  const handleGoToSecondPage = (id) => {
+    navigate(`/typingtrials2/${id}`)
   }
 
   return (
     <div>
+      
       <h1>Type the following phrase within 30 seconds:</h1>
       <p>{correctPhrase}</p>
       <input
@@ -71,14 +75,14 @@ const GameComponent = () => {
         onKeyDown={handleKeyDown}
       />
       <button onClick={handleCheckPhrase}>Submit</button>
-
+      
       {showPopup && (
         <div>
           {inputValue === correctPhrase ? (
             <>
               <p>Great job!</p>
               {showGoToSecondPage && (
-                <button onClick={handleGoToSecondPage}>Inspect bushes</button>
+                <button onClick={() => handleGoToSecondPage(id)}>Inspect bushes</button>
               )}
             </>
           ) : (
@@ -92,7 +96,11 @@ const GameComponent = () => {
       )}
 
       {timeLeft > 0 && !showPopup && <p>Time left: {timeLeft} seconds</p>}
+      <div className="pull_up">
+      <GameCharacter/>
+      </div>
     </div>
+    
   );
 };
 
