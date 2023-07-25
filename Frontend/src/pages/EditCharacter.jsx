@@ -240,7 +240,6 @@ useEffect(() => {
 
 useEffect(() => {
   if (oneCharacter) {
-    // Assuming oneCharacter has properties like 'head', 'body', etc.
     // Update the image states based on the character's chosen parts
     const { head, body, face, arms, legs, weapon, characterName } = oneCharacter;
 
@@ -275,6 +274,51 @@ useEffect(() => {
   }
 }, [oneCharacter]);
 
+// Randomizer
+const [randomClick, setrandomClick] = useState(0)
+
+  useEffect(() => {
+    const randomCharacter = async () => {
+      random_indexes()
+      const [headModule, faceModule, bodyModule, armModuleR, armModuleL, handModuleR, handModuleL, legModuleR, legModuleL, weaponModule] = await Promise.all([
+        import(`../images/${character_types[headIndex]}/Head.png`),
+        import(`../images/${character_types[faceIndex]}/Face 01.png`),
+        import(`../images/${character_types[bodyIndex]}/Body.png`),
+        import(`../images/${character_types[armsIndex]}/Right Arm.png`),
+        import(`../images/${character_types[armsIndex]}/Left Arm.png`),
+        import(`../images/${character_types[armsIndex]}/Right Hand.png`),
+        import(`../images/${character_types[armsIndex]}/Left Hand.png`),
+        import(`../images/${character_types[legsIndex]}/Right Leg.png`),
+        import(`../images/${character_types[legsIndex]}/Left Leg.png`),
+        import(`../images/${character_types[weaponIndex]}/Weapon.png`),
+
+      ]);
+      setHeadImage(headModule.default)
+      setFaceImage(faceModule.default)
+      setBodyImage(bodyModule.default)
+      setArmRightImage(armModuleR.default)
+      setArmLeftImage(armModuleL.default)
+      setHandRightImage(handModuleR.default)
+      setHandLeftImage(handModuleL.default)
+      setLegRightImage(legModuleR.default)
+      setLegLeftImage(legModuleL.default)
+      setWeaponImage(weaponModule.default)
+    };
+    if(randomClick != 0) {
+
+      randomCharacter();
+    }
+  }, [randomClick]);
+
+  const random_indexes = () =>{
+    setHeadIndex(Math.floor((Math.random() * character_types.length)))
+    setFaceIndex(Math.floor((Math.random() * character_types.length)))
+    setBodyIndex(Math.floor((Math.random() * character_types.length)))
+    setArmsIndex(Math.floor((Math.random() * character_types.length)))
+    setLegsIndex(Math.floor((Math.random() * character_types.length)))
+    setWeaponIndex(Math.floor((Math.random() * character_types.length)))
+
+}
 
   return (
 
@@ -484,7 +528,8 @@ useEffect(() => {
 
       <button className='selectButtons selectButtonsEdit randomizeBtn'
         type='button' 
-        style={{backgroundImage:`url(${randomBtn})`}}/>
+        style={{backgroundImage:`url(${randomBtn})`}}
+        onClick={() => setrandomClick((prevRandomClick) => prevRandomClick + 1)}/>
 
       {/* <button className='selectButtons createBtn'
         type='submit'
