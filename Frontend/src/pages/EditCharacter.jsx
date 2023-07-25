@@ -405,7 +405,7 @@ useEffect(() => {
 
 
       <div className='sceneContainer'>
-        <img className='background' src={background} alt="forest background" />
+        <img className='background' src={background} alt="forest background"/>
         <img className='frameEdit' src={frameEdit} alt="character frame" />
         {/* <div className='portalMask'>
         <img className='portal' src={portal} alt="character portal" />

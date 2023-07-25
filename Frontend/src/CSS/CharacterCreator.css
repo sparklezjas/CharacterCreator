@@ -166,14 +166,14 @@ button {
 .frame {
   width: 800px;
   margin: 150px 0px 0px 320px;
-  z-index: 2;
+  z-index: 1;
 }
 
 
 .portal {
   width: 500px;
   margin: -30px 0px 0px -100px;
-  z-index: 1;
+  z-index: 0;
   animation: spin 20s linear infinite;
 }
 
@@ -195,7 +195,7 @@ button {
 }
 
 .portalBack {
-  z-index: 0;
+  z-index: -1;
   width: 280px;
   margin: 200px 0px 0px 550px;
 }

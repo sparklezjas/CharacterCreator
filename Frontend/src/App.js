@@ -5,11 +5,11 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import CharacterCreator from './pages/CharacterCreator'
-import LogoSign from './components/LogoSign'
 import EditCharacter from './pages/EditCharacter'
 import GameComponent from './pages/GameComponent'
 import SecondPage from './pages/SecondPage'
 import Fight from './pages/Fight'
+import AudioPlayer from './components/AudioPlayer'
 
 function App() {
   const { user } = useAuthContext()
@@ -17,8 +17,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-        {/* <LogoSign/> */}
+
+          <AudioPlayer/>
+          <Navbar />
+          
         <div className="pages">
           <Routes>
             <Route
@@ -53,6 +55,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      
     </div>
   );
 }

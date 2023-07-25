@@ -11,6 +11,7 @@ import woodBkgd from '../images/woodBkgd.jpg'
 
 
 
+
 const Navbar = () => {
     const { logout } = useLogout()
     const { user } = useAuthContext()
@@ -20,6 +21,7 @@ const Navbar = () => {
     }
 
     return (
+    <div>
         <header>
             <div className="container"
             style={{backgroundImage:`url(${woodHeader})`, height:"80px"}}
@@ -28,6 +30,7 @@ const Navbar = () => {
                 <Link to="/">
                     <h1 style={{color:"black", marginLeft:"20px"}}></h1>
                 </Link>
+                
                 <nav style={{display:"flex"}}>
                     {user && (
                         <div>
@@ -56,6 +59,7 @@ const Navbar = () => {
                 </nav>
             </div>
         </header>
+    </div>
     )
 }
 
