@@ -1,0 +1,19 @@
+.enemy {
+    width: 400px;
+    margin-top: -180px;
+
+}
+
+.fight_scene {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player {
+margin-left: -400px;
+}
+
+.pull_up {
+    margin-top: -200px;
+}
