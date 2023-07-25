@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios'
 import '../CSS/CharacterCreator.css'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import background from '../images/darkForest.jpg'
 import frameEdit from '../images/buttons/frameEdit.png'
@@ -30,7 +31,7 @@ import EditSign from '../components/EditSign';
 const character_types = ['anubis', 'assassin_guy', 'black_ninja', 'citizen_women_1', 'citizen_women_2', 'citizen_women_3', 'dark_elf_1', 'dark_elf_3', 'egyptian_mummy', 'egyptian_sentry', 'ghost_pirate_1',  'ghost_pirate_2', 'goblin_1', 'goblin_3', 'medieval_king', 'medieval_knight', 'medieval_sergeant', 'minotaur_1', 'minotaur_2',  'villager_1', 'villager_3',  'white_armored_knight', 'white_ninja'];
 const EditCharacter = () => {
 
-
+  const { user } = useAuthContext()
   const navigate = useNavigate()
   const { id } = useParams();
   const [head, setHead] = useState ("")
@@ -165,6 +166,10 @@ useEffect(() => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setErrors('You must be logged in')
+      return
+    }
     if (!characterName.trim()) {
       setErrors({ characterName: 'Character name is required' })
       return
@@ -191,6 +196,7 @@ useEffect(() => {
         body: JSON.stringify(character),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         },
       });
       const data = await response.json();
@@ -212,18 +218,22 @@ useEffect(() => {
 const [oneCharacter, setOneCharacter] = useState();
 useEffect(() => {
   // Ensure the id exists and has a valid value
-  if (id) {
+  if (id && user) {
     axios
-      .get(`http://localhost:4000/api/characters/one/${id}`)
+      .get(`http://localhost:4000/api/characters/one/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+  })
       .then((res) => {
-        console.log("Response from API:", res);
+        console.log("Response from API:", res)
         setOneCharacter(res.data);
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
-}, [id]);
+}, [id, user])
 
 
   // Helper function to handle dynamic imports for images

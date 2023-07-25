@@ -11,7 +11,6 @@ import dungeon from '../images/dungeon.jpg'
 import welcome from '../images/keyboard.png'
 import create from '../images/buttons/create.png'
 
-
 const Home = () => {
 
     const navigate = useNavigate()
@@ -20,10 +19,14 @@ const Home = () => {
     const [sortedCharacters, setSortedCharacters] = useState([])
     const [sortOrder, setSortOrder] = useState()
 
-
     useEffect(() => {
+        if (user){
         axios
-        .get('http://localhost:4000/api/characters/all')
+        .get('http://localhost:4000/api/characters/all', {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         .then((res) => {
         console.log(res)
         setAllCharacters(res.data)
@@ -32,7 +35,8 @@ const Home = () => {
         .catch((err) => {
         console.log(err)
     })
-}, [])
+}
+}, [user])
 
     useEffect(() => {
         if (sortOrder === 'oldest') {
@@ -59,9 +63,16 @@ const Home = () => {
     }
 
     const deleteHandler = (id) => {
-
+        if (!user) {
+            console.log("User not logged in.");
+        return
+        }
         axios
-        .delete(`http://localhost:4000/api/characters/delete/${id}`)
+        .delete(`http://localhost:4000/api/characters/delete/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         .then((res) => {
             setAllCharacters(allCharacters.filter(character => character._id !== id))
             setSortedCharacters(sortedCharacters.filter(character => character._id !== id))
@@ -74,7 +85,6 @@ const Home = () => {
     const editPage = (id) => {
         navigate(`/characters/edit/${id}`);
     };
-    
     
     return (
     <div>

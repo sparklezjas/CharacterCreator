@@ -32,9 +32,13 @@ const characterSchema = new Schema({
         required: [true, 'Character name is required'],
         maxLength: [20, 'Character name must be 20 characters or less']
     },
-    
     HP: {
         type: Number,
+        required: true
+    },
+    user_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     }
 }, { timestamps: true })

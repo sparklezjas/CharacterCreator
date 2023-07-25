@@ -3,10 +3,16 @@ const Characters = require(`../models/characterModel`)
 const mongoose = require ('mongoose')
 
 const getCharacters = async (req, res) => {
-    const characters = await Characters.find({}).sort({createdAt: -1})
+
+    const userID = req.user._id 
+
+      try {
+    const characters = await Characters.find({ user_id: userID }).sort({createdAt: -1})
 
     res.status(200).json(characters)
-}
+} catch (error) {
+  res.status(500).json({ error: 'Error fetching characters'})
+}}
 
 const getCharacter = async (req, res) => {
     const {id} = req.params
@@ -27,7 +33,7 @@ const createCharacter = async (req, res) => {
         return res.status(400).json({ error: 'Character name is required' });
       }
     try{ 
-        const character = await Characters.create({head, face, body, arms, legs, weapon, characterName, HP})
+        const character = await Characters.create({head, face, body, arms, legs, weapon, characterName, HP, user_id: req.user._id})
         res.status(200).json(character)
     }
         catch (error){

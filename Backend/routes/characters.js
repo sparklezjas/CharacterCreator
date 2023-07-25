@@ -1,18 +1,20 @@
 const express = require('express')
+const router = express.Router()
 const {
-    createCharacter,
     getCharacter,
     getCharacters,
+    createCharacter,
     deleteCharacter,
     updateCharacter
 } = require('../controllers/characterController')
+const requireAuth = require('../middleware/requireAuth')
 
-const router = express.Router()
+router.use(requireAuth)
 
-router.get('/all', getCharacters)
-router.get('/one/:id', getCharacter)
-router.post('/new', createCharacter)
-router.delete('/delete/:id', deleteCharacter)
-router.patch('/edit/:id', updateCharacter)
+router.get('/all', requireAuth, getCharacters)
+router.get('/one/:id', requireAuth, getCharacter)
+router.post('/new', requireAuth, createCharacter)
+router.delete('/delete/:id', requireAuth, deleteCharacter)
+router.patch('/edit/:id', requireAuth, updateCharacter)
 
 module.exports = router

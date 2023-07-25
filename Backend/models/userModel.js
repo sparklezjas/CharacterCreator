@@ -9,7 +9,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: [1, 'Character name is required'],
+    minlength: [1, 'Username is required'],
     maxlength: [20, 'Name must be 20 characters or less']
     },
     email: {

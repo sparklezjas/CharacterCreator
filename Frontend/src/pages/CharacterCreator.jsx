@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../CSS/CharacterCreator.css'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 import darkElfHead from '../images/dark_elf_1/Head.png';
 import darkElfFace from '../images/dark_elf_1/Face 01.png';
@@ -42,6 +43,7 @@ import CreateSign from '../components/CreateSign'
 const character_types = ['anubis', 'assassin_guy', 'black_ninja', 'citizen_women_1', 'citizen_women_2', 'citizen_women_3', 'dark_elf_1', 'dark_elf_3', 'egyptian_mummy', 'egyptian_sentry', 'ghost_pirate_1',  'ghost_pirate_2', 'goblin_1', 'goblin_3', 'medieval_king', 'medieval_knight', 'medieval_sergeant', 'minotaur_1', 'minotaur_2',  'villager_1', 'villager_3',  'white_armored_knight', 'white_ninja'];
 const CharacterCreator = () => {
 
+  const {user} = useAuthContext()
 
   const navigate = useNavigate()
   const [head, setHead] = useState ("")
@@ -223,7 +225,12 @@ useEffect(() => {
 
   // Submitting Form
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    if (!user){
+      setErrors('You must be logged in')
+      return
+    }
     const character = {
       head: character_types[headIndex],
       face: character_types[faceIndex],
@@ -240,6 +247,7 @@ useEffect(() => {
       body: JSON.stringify(character),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       },
     });
   
