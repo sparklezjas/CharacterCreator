@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios'
 import '../CSS/CharacterCreator.css'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const GameCharacter = () => {
     const { id } = useParams();
+    const {user} = useAuthContext()
 
     const [headIndex, setHeadIndex] = useState(0);
     const [headImage, setHeadImage] = useState(null);
@@ -27,21 +29,25 @@ const GameCharacter = () => {
 
     const character_types = ['anubis', 'assassin_guy', 'black_ninja', 'citizen_women_1', 'citizen_women_2', 'citizen_women_3', 'dark_elf_1', 'dark_elf_3', 'egyptian_mummy', 'egyptian_sentry', 'ghost_pirate_1',  'ghost_pirate_2', 'goblin_1', 'goblin_3', 'medieval_king', 'medieval_knight', 'medieval_sergeant', 'minotaur_1', 'minotaur_2',  'villager_1', 'villager_3',  'white_armored_knight', 'white_ninja'];
 
-const [oneCharacter, setOneCharacter] = useState();
-useEffect(() => {
-  // Ensure the id exists and has a valid value
-  if (id) {
-    axios
-      .get(`http://localhost:4000/api/characters/one/${id}`)
-      .then((res) => {
-        console.log("Response from API:", res);
-        setOneCharacter(res.data);
+    const [oneCharacter, setOneCharacter] = useState();
+    useEffect(() => {
+      // Ensure the id exists and has a valid value
+      if (id && user) {
+        axios
+          .get(`http://localhost:4000/api/characters/one/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-}, [id]);
+          .then((res) => {
+            console.log("Response from API:", res)
+            setOneCharacter(res.data);
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    }, [id, user])
 
 
   // Helper function to handle dynamic imports for images
