@@ -27,19 +27,8 @@ const Signup = () => {
         <div>
 
             <div>
-                <Link to="/login">
-                    <button className=' registrationButtons lgLoginButton' type='button'
-                    style={{backgroundImage:`url(${loginB})`}}/>
-                </Link>
-
-                <Link to="/signup">
-                    <button className='registrationButtons lgSignupBtn' type='button'
-                    style={{backgroundImage:`url(${signupB})`}}/>
-                </Link>
                 <img className='loginGraphics' src={signupWelcome} alt="welcome login screen" />
             </div>
-
-
             <form className="signup" onSubmit={handleSubmit}>
             
 
@@ -73,7 +62,7 @@ const Signup = () => {
                     <button disabled={isLoading}
                         className="enterButton"
                         style={{backgroundImage:`url(${enter})`}}
-                    ></button> {error && <div className="error">{error}
+                    ></button> {error && <div className="error signup-error">{error}
                     </div>}
                 </div>
             </form>

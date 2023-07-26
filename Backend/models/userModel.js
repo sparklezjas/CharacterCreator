@@ -6,29 +6,33 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     name: {
-    type: String,
-    required: true,
-    unique: true,
-    minlength: [1, 'Username is required'],
-    maxlength: [20, 'Name must be 20 characters or less']
+        type: String,
+        required: [true, 'Username is required'],
+        unique: true,
+        minlength: [1, 'Name must be at least 1 character'],
+        maxlength: [20, 'Name must be 20 characters or less'],
     },
     email: {
-    type: String,
-    required: true,
-    unique: true
-},
+        type: String,
+        required: [true, 'Email is required'],
+        unique: true,
+        validate: {
+        validator: (value) => validator.isEmail(value),
+        message: 'Invalid email format',
+        },
+    },
     password: {
-    type: String,
-    required: true
-}
-})
+        type: String,
+        required: [true, 'Password is required'],
+    },
+    })
 
 // static signup method
 userSchema.statics.signup = async function(name, email, password) {
 
   // validation
     if (!name || !email || !password ) {
-    throw Error('All fields must be filled')
+    throw Error('HALT! All fields must be filled!')
     }
     if (!name) {
         throw new Error('Name field must be filled');
@@ -61,7 +65,7 @@ userSchema.statics.signup = async function(name, email, password) {
 userSchema.statics.login = async function(email, password) {
 
     if (!email || !password) {
-    throw Error('All fields must be filled')
+    throw Error('HALT! All fields must be filled!')
 }
 
     const user = await this.findOne({ email })
