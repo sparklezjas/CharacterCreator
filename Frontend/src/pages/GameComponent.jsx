@@ -122,6 +122,7 @@ const GameComponent = () => {
             </>
           ) : (
             <>
+              <p className="gameMessages greatJob">Try again!</p>
               {showTryAgain && (
                 <button
                 className="retryButton"
