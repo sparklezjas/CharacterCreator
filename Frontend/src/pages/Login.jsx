@@ -1,12 +1,8 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
-import { Link } from 'react-router-dom'
-import loginB from '../images/buttons/login.png'
-import signupB from '../images/buttons/signup.png'
 import enter from '../images/buttons/enter.png'
 import loginWelcome from '../images/keyboardLogin.png'
 import loginScroll from '../images/loginScroll.png'
-
 import '../CSS/Login.css'
 
 const Login = () => {
@@ -22,22 +18,9 @@ const Login = () => {
 
     return (
         <div>
-            <div>
-                <Link to="/login">
-                    <button className=' registrationButtons lgLoginButton' type='button'
-                    style={{backgroundImage:`url(${loginB})`}}/>
-                </Link>
-
-                <Link to="/signup">
-                    <button className='registrationButtons lgSignupBtn' type='button'
-                    style={{backgroundImage:`url(${signupB})`}}/>
-                </Link>
-                <img className='loginGraphics' src={loginWelcome} alt="welcome login screen" />
-            </div>  
-
+            <img className='loginGraphics' src={loginWelcome} alt="welcome login screen" />
         
         <form className="login" onSubmit={handleSubmit}>
-
 
         <div className="regContainer">
         <img className='scrollGraphics' src={loginScroll} alt="welcome login screen" />
