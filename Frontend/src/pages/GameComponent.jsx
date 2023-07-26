@@ -92,7 +92,8 @@ const GameComponent = () => {
         <GameCharacter/>
       </div>
       <div className="fightInfo">
-        <h2 className="instructions">Type the following phrase:</h2>
+      <div className="bottomDetails">
+        <h2 className="instructions instNoEnemy">Type the following phrase:</h2>
         <p className="typePhrase">{correctPhrase}</p>
         <input
           className="inputGameText"
@@ -106,6 +107,7 @@ const GameComponent = () => {
         style={{backgroundImage:`url(${submit})`}}
         onClick={handleCheckPhrase} 
         type="submit"></button>
+      </div>
       </div>
       {showPopup && (
         <div>
@@ -131,11 +133,12 @@ const GameComponent = () => {
           )}
         </div>
       )}
-
+      <div className="timer">
       {timeLeft > 0 && !showPopup && 
       <p className="gameMessages">Time left...
       <br />
       <span className="seconds">{timeLeft} Sec</span></p>}
+    </div>
     </div>
   );
 };

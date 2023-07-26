@@ -1,18 +1,29 @@
 .fightBkgd {
     border: 2px solid black;
     margin-bottom: -370px;
-    margin-top: -100px;
+    margin-top: -390px;
 }
+
+.fightBkgd2 {
+  position: absolute;
+    margin-top: -387px;
+
+}
+
 
 .fightInfo {
     color: white;
     margin-left: 30px;
-    margin-top: 314px
+
 }
 
 .instructions {
     font-size: 24pt;
     margin-bottom: -15px;
+}
+
+.instNoEnemy {
+  margin-top: 370px;
 }
 
 .typePhrase {
@@ -36,6 +47,10 @@
     position: absolute;
     z-index: 2;
     background-color: rgba(255, 255, 255, 0.65);
+}
+
+.bottomDetails {
+  margin-top: 65px;
 }
 
 @keyframes wiggle {
@@ -64,8 +79,14 @@
     z-index: 1;
 }
 
+.timer {
+  position: relative;
+  top: -40px;
+  left: 20px;
+}
+
 .submitButton {
-    width: 200px;
+    width: 145px;
     height: 50px;
     margin-top: 33px;
     background-size: contain;
@@ -81,7 +102,7 @@
   }
 
 .retryButton {
-    width: 200px;
+    width: 145px;
     height: 50px;
     margin-left: 185px;
     top: -55px;
@@ -102,6 +123,7 @@
     font-size: 16pt;
     margin-left: 30px;
     margin-top: -615px;
+    z-index: 5;
   }
 
   .seconds {
@@ -134,13 +156,13 @@
   }
 
   .enemyBush {
-    position: absolute;
-    left: 950px;
-    bottom: 300px;
-    transform: translateX(0);
+    position: relative;
+    left: 750px;
+    top: 85px;
+    /* transform: translateX(0); */
     animation: monsterPeek 2s infinite;
     scale: 60%;
-    z-index: 0;
+    z-index: 1;
   }
 
   @keyframes monsterPeek {

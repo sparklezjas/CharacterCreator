@@ -84,13 +84,16 @@ useEffect(() => {
     <div>
       <div>
         <img className='bush' src={bush} alt="bush"/>
-        <img src={enemy} alt="enemy" className="enemy enemyBush" />
-        <img className='fightBkgd' src={fightForest} alt="forest background" />
+        <div className="enemyLock">
+        <img src={enemy} alt="enemy" className="enemyBush" />
+        </div>
+        <img className='fightBkgd fightBkgd2' src={fightForest} alt="forest background" />
       </div >
       <div className="pull_up characterPosition">
         <GameCharacter/>
       </div>
       <div className="fightInfo">
+        <div className="bottomDetails">
       <h2 className="instructions">Type the following phrase:</h2>
         <p className="typePhrase">{correctPhrase}</p>
         <input
@@ -105,6 +108,7 @@ useEffect(() => {
         style={{backgroundImage:`url(${submit})`}}
         onClick={handleCheckPhrase}
         type="submit"></button>
+        </div>
       </div>
       {showPopup && (
         <div>
@@ -130,11 +134,12 @@ useEffect(() => {
           )}
         </div>
       )}
-
+      <div className="timer">
       {timeLeft > 0 && !showPopup && 
       <p className="gameMessages">Time left...
       <br />
       <span className="seconds">{timeLeft} Sec</span></p>}
+      </div>
     </div>
   );
 };
