@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
+import { useNavigate } from "react-router-dom"
 import enter from '../images/buttons/enter.png'
 import loginWelcome from '../images/keyboardLogin.png'
 import loginScroll from '../images/loginScroll.png'
@@ -8,12 +9,22 @@ import '../CSS/Login.css'
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { login, error, isLoading } = useLogin()
+    const [error, setError] = useState('')
+    const { login, isLoading } = useLogin()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!email || !password) {
+            setError("HALT! All fields are required.")
+            return
+        }
         await login(email, password)
+        if (error) {
+            return
+        }
+        navigate('/characters/all')
     }
 
     return (

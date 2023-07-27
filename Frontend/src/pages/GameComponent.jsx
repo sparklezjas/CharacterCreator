@@ -17,7 +17,7 @@ const GameComponent = () => {
   const [showGoToSecondPage, setShowGoToSecondPage] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30)
   
-  const correctPhrase = "The young champion was in a forest and suddenly heard a rustle in the bushes."
+  const correctPhrase = `The courageous champion was walking through a dark forest and suddenly heard a rustle in the bushes.`
   
   const navigate = useNavigate()
 

@@ -392,6 +392,15 @@ button {
 
 /* EDIT PAGE ------------------------------------ */
 
+.sceneContainerEdit {
+  position: relative;
+  top: 300px;
+}
+
+.stoneSign {
+  position: relative;
+  top: 300px;
+}
 
 .frameEdit {
   width: 850px;
@@ -404,7 +413,9 @@ button {
 }
 
 .saveButtonEdit {
-  top: 297px;
+  position: absolute;
+  z-index: 5;
+  top: 622px;
   left: -260px;
 }
 
@@ -418,4 +429,19 @@ button {
 
 .cancelButton:hover {
   filter: brightness(.9) contrast(1.1);
+}
+
+.champion {
+  position: relative;
+  top: 300px;
+}
+
+.editError {
+  position: relative;
+  rotate: 4deg;
+  width: 500px;
+  top: 715px;
+  left: -450px;
+  z-index: 5;
+
 }

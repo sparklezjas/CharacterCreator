@@ -1,26 +1,31 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
-import { Link } from 'react-router-dom'
-import loginB from '../images/buttons/login.png'
-import registerB from '../images/buttons/register.png'
-import signupB from '../images/buttons/signup.png'
+import { useNavigate } from 'react-router-dom'
 import enter from '../images/buttons/enter.png'
 import signupWelcome from '../images/keyboardSignup.png'
 import signupScroll from '../images/signupScroll.png'
 
 import '../CSS/Login.css'
 
-
 const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { signup, error, isLoading } = useSignup();
+    const [error, setError] = useState('')
+    const { signup, isLoading } = useSignup();
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        await signup(name, email, password);
+        if (!name || !email || !password) {
+            setError("HALT! All fields are required.")
+            return
+        }
+        await signup(name, email, password)
+        if (error) {
+            return
+        }
+        navigate('/characters/all')
     };
 
     return (

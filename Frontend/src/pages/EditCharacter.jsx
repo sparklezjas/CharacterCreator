@@ -335,46 +335,48 @@ const [randomClick, setrandomClick] = useState(0)
   <div className='screenBackground'
   // style={{backgroundImage:`url(${woodBkgd})`}}
     >
+    <div className='stoneSign'>
     <EditSign/>
+    </div>
 
     <form className="character_div" onSubmit={submitHandler}>
 
 
 {/* CHARACTER -------------------------------------------------------- */}
+      <div className='champion'>
+        {headImage && <img src={headImage} 
+        alt="head" className="char_head" />}
 
-      {headImage && <img src={headImage} 
-      alt="head" className="char_head" />}
+        {bodyImage && <img src={bodyImage}
+        alt="body" className="char_body" />}
 
-      {bodyImage && <img src={bodyImage}
-       alt="body" className="char_body" />}
+        {faceImage && <img src={faceImage}
+        alt="face" className="char_face" />}
 
-      {faceImage && <img src={faceImage}
-       alt="face" className="char_face" />}
+        <div className="right_arm_div grouped_char_piece">
+        {armRightImage && <img src={armRightImage} 
+        alt="arm" className="char_right_arm" />}
+        {handRightImage && <img src={handRightImage} 
+        alt="hand" className="char_right_hand" />}
+        </div>
 
-      <div className="right_arm_div grouped_char_piece">
-      {armRightImage && <img src={armRightImage} 
-      alt="arm" className="char_right_arm" />}
-      {handRightImage && <img src={handRightImage} 
-      alt="hand" className="char_right_hand" />}
+        <div className="left_arm_div grouped_char_piece">
+        {armLeftImage && <img src={armLeftImage} 
+        alt="arm" className="char_left_arm" />}
+        {handLeftImage && <img src={handLeftImage} 
+        alt="hand" className="char_left_hand" />}
+        </div>
+
+        <div className="grouped_char_piece leg_div">
+        {legRightImage && <img src={legRightImage} 
+        alt="leg" className="char_right_leg" />}
+        {legLeftImage && <img src={legLeftImage} 
+        alt="leg" className="char_left_leg" />}
+        </div>
+
+        {weaponImage && <img src={weaponImage} 
+        alt="weapon" className="char_weapon" />}
       </div>
-
-      <div className="left_arm_div grouped_char_piece">
-      {armLeftImage && <img src={armLeftImage} 
-      alt="arm" className="char_left_arm" />}
-      {handLeftImage && <img src={handLeftImage} 
-      alt="hand" className="char_left_hand" />}
-      </div>
-
-      <div className="grouped_char_piece leg_div">
-      {legRightImage && <img src={legRightImage} 
-      alt="leg" className="char_right_leg" />}
-      {legLeftImage && <img src={legLeftImage} 
-      alt="leg" className="char_left_leg" />}
-      </div>
-
-      {weaponImage && <img src={weaponImage} 
-      alt="weapon" className="char_weapon" />}
-
 
 {/* BUTTONS -------------------------------------------------------- */}
 
@@ -439,10 +441,10 @@ const [randomClick, setrandomClick] = useState(0)
       className="char_button button_right weapon_button">
        Weapon→</button> */}
 
-      <div className="error">{errors.characterName}</div>
+      <div className="error editError">{errors.characterName}</div>
       
-      <input type="text" 
-      onChange={(e) => setCharacterName(e.target.value)} value={characterName} />
+      {/* <input type="text" 
+      onChange={(e) => setCharacterName(e.target.value)} value={characterName} /> */}
       
       {/* <button className='submit_button char_button'  
       type='submit'>Submit</button> */}
@@ -458,7 +460,7 @@ const [randomClick, setrandomClick] = useState(0)
 {/* REVISION -------------------------------------------------------- */}
 
 
-      <div className='sceneContainer'>
+      <div className='sceneContainer sceneContainerEdit'>
         <img className='background' src={background} alt="forest background"/>
         <img className='frameEdit' src={frameEdit} alt="character frame" />
         {/* <div className='portalMask'>

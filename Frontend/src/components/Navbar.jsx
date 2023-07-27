@@ -30,12 +30,17 @@ const Navbar = () => {
                     {user && (
                         <div>
                             <span className='userInfo'>
-                            Hello, {user.email}!</span>
+                            Hello, {user.email}!
+                        </span>
+
+                        <Link to="/login">
                         <button className='authButtons logoutBtn' type='button'
                             style={{backgroundImage:`url(${logoutB})`}}
                             onClick={handleClick}/>
-                            </div>
+                        </Link>
+                        </div>
                             )}
+
                     {!user && (
                                     <div className='nav-bar-buttons'>
                                     <Link to="/login">
