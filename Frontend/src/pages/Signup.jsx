@@ -11,22 +11,28 @@ const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState('')
-    const { signup, isLoading } = useSignup();
-    const navigate = useNavigate()
+    // const [error, setError] = useState('')
+    const { signup, error, isLoading } = useSignup();
+    // const navigate = useNavigate()
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     if (!name || !email || !password) {
+    //         setError("HALT! All fields are required.")
+    //         return
+    //     }
+    //     await signup(name, email, password)
+    //     if (error) {
+    //         return
+    //     }
+    //     navigate('/characters/all')
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!name || !email || !password) {
-            setError("HALT! All fields are required.")
-            return
-        }
         await signup(name, email, password)
-        if (error) {
-            return
-        }
-        navigate('/characters/all')
     };
+
 
     return (
         <div>

@@ -14,6 +14,7 @@ const Navbar = () => {
     const handleClick = () => {
         logout()
     }
+    
 
     return (
     <div>
